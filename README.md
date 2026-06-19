@@ -209,24 +209,35 @@ Checkpoint policy:
 
 ---
 
-## Output Visualizations
+## Stage 1 Output Visualizations
 
-### Post-tokenizer (before training)
+All outputs are written to `<output_dir>/` (default: `runs/stage1_first500/`).
+
+### Before training (tokenizer inspection)
 | File | What it shows |
 |------|---------------|
-| `rgb_patch_grid.png` | Image divided into 784 patches with grid overlay |
-| `rgb_token_similarity.png` | Cosine similarity between patch embeddings |
-| `rgb_positional_encoding.png` | Spatial patterns in sinusoidal pos encoding |
+| `rgb_patch_grid.png` | Image divided into 784 patches (28×28 grid) with overlay |
+| `rgb_token_similarity.png` | Cosine similarity heatmap between patch embeddings |
+| `rgb_positional_encoding.png` | Spatial patterns in sinusoidal positional encoding |
 | `rgb_token_norms.png` | Per-patch activation strength heatmap |
-| `lidar_fps_centers.html` | FPS-selected center points in full cloud |
-| `lidar_patch_groups.html` | Each kNN group in a different color |
-| `lidar_token_similarity.png` | Patch embedding similarity + norm bar chart |
-| `lidar_token_norms_3d.html` | 3D cloud colored by token activation |
+| `lidar_fps_centers.html` | FPS-selected center points overlaid on full point cloud |
+| `lidar_patch_groups.html` | Each kNN group rendered in a distinct color |
+| `lidar_token_similarity.png` | Patch embedding cosine similarity + norm bar chart |
+| `lidar_token_norms_3d.html` | 3D point cloud colored by token activation magnitude |
 
-### Post-training
+### After training (reconstruction quality)
 | File | What it shows |
 |------|---------------|
-| `training_curves.png` | Loss + PSNR for both modalities |
-| `rgb_reconstruction.png` | Original → Masked → Reconstructed images |
-| `lidar_masking.html` | Visible (blue) vs masked (red) patches |
+| `training_curves.png` | RGB + LiDAR loss and PSNR curves across epochs |
+| `rgb_reconstruction.png` | Side-by-side: Original → Masked → Reconstructed image |
+| `lidar_masking.html` | Visible (blue) vs masked (red) LiDAR patches |
 | `lidar_reconstruction.html` | Original vs reconstructed point cloud |
+
+### Saved weights
+| File | Contents |
+|------|----------|
+| `checkpoints/stage1_best.pth` | Full restartable state at best validation loss |
+| `checkpoints/stage1_last.pth` | Full restartable state at last epoch |
+| `checkpoints/stage1_checkpoint1..4.pth` | Rolling recent checkpoints |
+| `exports/omnivec2_stage1_rgb_lidar.pth` | Backbone only (encoder + tokenizers) for Stage 2 init |
+| `exports/omnivec2_stage1_full.pth` | Full model weights |
