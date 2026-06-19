@@ -121,26 +121,20 @@ Located in `s2_world_model_2/`, trained by `train_s2_world_model_2.py` (base) an
 
 ## Environment Setup
 
-Two conda environments are used on HiPerGator:
-
-| Env | Used by |
-|-----|---------|
-| `omnivec2` | Stage 1, Stage 2 |
-| `omnivec2_fix` | World Model (WM2, WM3) |
+Use the `omnivec2_fix` conda environment for all stages — Stage 1, Stage 2, and World Model.
 
 ```bash
 module load conda
-conda activate omnivec2        # for Stage 1 / Stage 2
-conda activate omnivec2_fix    # for World Model
+conda activate omnivec2_fix
 ```
 
 ### Create from scratch (conda — HiPerGator)
 
 ```bash
 module load conda
-conda create -n omnivec2 python=3.10 -y
+conda create -n omnivec2_fix python=3.10 -y
 source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate omnivec2
+conda activate omnivec2_fix
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu118
 pip install -r requirements.txt
 ```
