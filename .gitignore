@@ -1,0 +1,39 @@
+# Checkpoints, exports, and large run outputs
+runs/
+backups/
+experiments/
+
+# SLURM log files
+*.log
+*.err
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Env / IDE
+.env
+.venv
+venv/
+.vscode/
+.idea/
+
+# Visualization outputs (regenerated at runtime)
+*.html
+*.png
+web_reconstruction.png
+
+# Misc
+logs/
+*.tmp
+.DS_Store
